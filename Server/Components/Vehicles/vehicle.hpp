@@ -25,7 +25,7 @@ struct VehicleDeathData
 	int killerID = INVALID_PLAYER_ID; ///< Purposely made an ID instead of a pointer because a player might become invalid between reporting tick and next tick
 };
 
-class Vehicle final : public IVehicle, public PoolIDProvider, public NoCopy
+class Vehicle final : public IVehicle, public PoolIDProvider, public NoCopy, public CoreEventHandler
 {
 private:
 	ICore& core;
