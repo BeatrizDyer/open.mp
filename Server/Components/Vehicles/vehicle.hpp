@@ -28,6 +28,7 @@ struct VehicleDeathData
 class Vehicle final : public IVehicle, public PoolIDProvider, public NoCopy
 {
 private:
+	ICore& core;
 	Vector3 pos;
 	GTAQuat rot;
 	int virtualWorld_ = 0;
