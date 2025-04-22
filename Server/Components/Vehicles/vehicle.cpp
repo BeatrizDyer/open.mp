@@ -388,9 +388,12 @@ bool Vehicle::updateFromPassengerSync(const VehiclePassengerSyncPacket& passenge
 	}
 	// Only do heavy processing if switching vehicle or switching between driver and passenger
 	int passengerSeats = Impl::getVehiclePassengerSeats(getModel());
+
+	bool isSanityCheckEnabled = this->core->getConfig().getBool("game.passenger_seats_sanity_check");
+
 	// TODO: Deal with two players in the same seat.
 	// TODO: Detect fast switching cheats.
-	if (passengerSeats == 0xFF || passengerSync.SeatID < 1 || passengerSync.SeatID > passengerSeats)
+	if (passengerSeats == 0xFF || passengerSync.SeatID < 1 || (isSanityCheckEnabled && passengerSync.SeatID > passengerSeats))
 	{
 		// Can't be a passenger there.  NOT an OBOE.
 		// Just ignore the packet for now.
