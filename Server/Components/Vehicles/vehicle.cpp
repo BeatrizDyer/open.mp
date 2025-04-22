@@ -382,7 +382,8 @@ bool Vehicle::updateFromTrailerSync(const VehicleTrailerSyncPacket& trailerSync,
 bool Vehicle::updateFromPassengerSync(const VehiclePassengerSyncPacket& passengerSync, IPlayer& player)
 {
 	PlayerVehicleData* data = queryExtension<PlayerVehicleData>(player);
-	
+	PlayerVehicleData& self;
+
 	if (!data)
 	{
 		return false;
@@ -390,7 +391,7 @@ bool Vehicle::updateFromPassengerSync(const VehiclePassengerSyncPacket& passenge
 	// Only do heavy processing if switching vehicle or switching between driver and passenger
 	int passengerSeats = Impl::getVehiclePassengerSeats(getModel());
 
-	bool isSanityCheckEnabled = data.core->getConfig().getBool("game.passenger_seats_sanity_check");
+	bool isSanityCheckEnabled = self.core->getConfig().getBool("game.passenger_seats_sanity_check");
 
 	// TODO: Deal with two players in the same seat.
 	// TODO: Detect fast switching cheats.
