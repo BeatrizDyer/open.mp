@@ -25,9 +25,10 @@ struct VehicleDeathData
 	int killerID = INVALID_PLAYER_ID; ///< Purposely made an ID instead of a pointer because a player might become invalid between reporting tick and next tick
 };
 
-class Vehicle final : public IVehicle, public PoolIDProvider, public NoCopy
+class Vehicle final : public IVehicle, public PoolIDProvider, public NoCopy, public CoreEventHandler
 {
 private:
+	ICore* core = nullptr;
 	Vector3 pos;
 	GTAQuat rot;
 	int virtualWorld_ = 0;
@@ -422,7 +423,7 @@ public:
 	}
 };
 
-class PlayerVehicleData final : public IPlayerVehicleData, public CoreEventHandler
+class PlayerVehicleData final : public IPlayerVehicleData
 {
 private:
 	IPlayer& player;
@@ -434,14 +435,10 @@ private:
 	bool cuffed = false;
 
 public:
-	ICore& core;
-
 	PlayerVehicleData(IPlayer& player)
 		: player(player)
 	{
 	}
-
-	void onTick(Microseconds elapsed, TimePoint now) override {}
 
 	void setNumStreamed(int num)
 	{
