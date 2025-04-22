@@ -425,7 +425,6 @@ public:
 class PlayerVehicleData final : public IPlayerVehicleData, public CoreEventHandler
 {
 private:
-	ICore& core;
 	IPlayer& player;
 	Vehicle* vehicle = nullptr;
 	int seat = SEAT_NONE;
@@ -435,6 +434,8 @@ private:
 	bool cuffed = false;
 
 public:
+	ICore& core;
+	
 	PlayerVehicleData(ICore& core, IPlayer& player)
 		: core(core)
 		, player(player)
