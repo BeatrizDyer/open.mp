@@ -436,10 +436,12 @@ private:
 public:
 	ICore& core;
 
-	PlayerVehicleData(IPlayer& player)
-		: player(player)
+	PlayerVehicleData(IPlayer& player, ICore& core)
+		: player(player), core(core)
 	{
 	}
+
+	void onTick(Microseconds elapsed, TimePoint now) override {}
 
 	void setNumStreamed(int num)
 	{
