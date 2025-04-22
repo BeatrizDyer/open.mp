@@ -436,8 +436,8 @@ private:
 public:
 	ICore& core;
 
-	PlayerVehicleData(IPlayer& player, ICore& core)
-		: player(player), core(core)
+	PlayerVehicleData(IPlayer& player)
+		: player(player)
 	{
 	}
 
